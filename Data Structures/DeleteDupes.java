@@ -22,4 +22,24 @@ public class DeleteDupes {
 
         return head;
     }
+
+    public ListNode deleteAllDuplicates(ListNode head) {
+        ListNode dh = new ListNode(-1);
+        dh.next = head;
+
+        ListNode temp = dh;
+        int d;
+
+        while(temp.next != null && temp.next.next != null) {
+            if(temp.next.val == temp.next.next.val) {
+                d = temp.next.val;
+                while(temp.next != null && temp.next.val == d) temp.next = temp.next.next; 
+            }
+            else {
+                temp = temp.next;
+            }
+        }
+
+        return dh.next;
+    }
 }
