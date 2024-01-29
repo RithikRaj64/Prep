@@ -5,7 +5,7 @@
 // - If there is a cycle, the hare will eventually catch up to the tortoise.
 // - If there is no cycle, the hare will reach the end of the list.
 
-public class LLCycle1 {
+public class LLCycle {
     public static void main(String[] args) {
         CLinkedList ll = new CLinkedList();
 
@@ -24,10 +24,21 @@ public class LLCycle1 {
             System.out.println("No cycle detected");
         }
 
-        ll.head.next.next.next.next.next = ll.head.next.next;
+        ll.head.next.next.next.next.next = ll.head.next;
+
+        ll.head.next = ll.head;
 
         if(ll.hasCycle()) {
             System.out.println("Cycle detected");
+        }
+        else {
+            System.out.println("No cycle detected");
+        }
+
+        CNode cycleNode = ll.detectCycleWithNode(ll.head);
+
+        if(cycleNode != null) {
+            System.out.println("Cycle detected at node: " + cycleNode.data);
         }
         else {
             System.out.println("No cycle detected");
@@ -95,4 +106,32 @@ class CLinkedList {
 
         return true;
     }
+
+    public CNode detectCycleWithNode(CNode head) {
+        if(head == null) return null;
+
+        CNode tortoise = head;
+        CNode hare = head;
+
+        while(true) {
+            if(hare == null || hare.next == null) return null;
+            
+            tortoise = tortoise.next;
+            hare = hare.next.next;
+            
+            if(hare == tortoise) {
+                tortoise = head;
+
+                while(hare != tortoise) {
+                    tortoise = tortoise.next;
+                    hare = hare.next;
+                }
+
+                return tortoise;
+            }
+        }
+    }
 }
+
+
+

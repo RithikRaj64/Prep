@@ -106,7 +106,6 @@ class RLinkedList {
             count++;
         }
 
-
         if(next != null) {
             head.next = reverseInK(next, k);
         }

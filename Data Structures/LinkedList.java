@@ -30,6 +30,10 @@ public class LinkedList {
 
         System.out.println("List after deleting element at index 3: ");
         list.print();
+
+        System.out.println("List after reversing: ");
+        list.head = list.reverse(list.head);
+        list.print();
     }
 }
 
@@ -151,9 +155,9 @@ class List {
         }
     }
 
-    void reverse() {
+    Node reverse(Node head) {
         Node prev = null;
-        Node curr = null;
+        Node curr = head;
         Node next = null;
 
         while(curr != null) {
@@ -165,5 +169,7 @@ class List {
 
             curr = next;
         }
+
+        return prev;
     }
 }
